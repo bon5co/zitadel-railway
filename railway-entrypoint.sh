@@ -2,9 +2,10 @@
 # Railway boot for ZITADEL. Required variables (set by the template):
 #   ZITADEL_MASTERKEY            exactly 32 characters
 #   ZITADEL_ADMIN_PASSWORD       password of the console admin (login name printed below)
-#   PGHOST PGUSER PGPASSWORD     the Postgres service (superuser, used for init and runtime)
+#   PGHOST PGPASSWORD            the Postgres service (PGUSER defaults to postgres; superuser for init and runtime)
 # Optional: RAILWAY_PUBLIC_DOMAIN (public host), PORT (listen port, defaults to 8080).
 set -eu
+PGUSER="${PGUSER:-postgres}"
 
 PORT="${PORT:-8080}"
 DOMAIN="${ZITADEL_EXTERNALDOMAIN:-${RAILWAY_PUBLIC_DOMAIN:-localhost}}"
@@ -21,7 +22,7 @@ PAT_FILE="$DATA/railway-agent.pat"
 export ZITADEL_PORT="$PORT"
 export ZITADEL_EXTERNALDOMAIN="$DOMAIN"
 export ZITADEL_DATABASE_POSTGRES_HOST="${PGHOST:?PGHOST is required}"
-export ZITADEL_DATABASE_POSTGRES_USER_USERNAME="${PGUSER:?PGUSER is required}"
+export ZITADEL_DATABASE_POSTGRES_USER_USERNAME="$PGUSER"
 export ZITADEL_DATABASE_POSTGRES_USER_PASSWORD="${PGPASSWORD:?PGPASSWORD is required}"
 export ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME="$PGUSER"
 export ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD="$PGPASSWORD"
