@@ -24,5 +24,5 @@ jobs:
           push: true
           provenance: false
           tags: |
-            ghcr.io/bon5co/zitadel-railway:v4.20.0
+            ghcr.io/bon5co/zitadel-railway:4.20.0
             ghcr.io/bon5co/zitadel-railway:latest
